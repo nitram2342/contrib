@@ -6,7 +6,6 @@
 
 # Allow user to specify logfile through env.logfile
 LOGFILE=${logfile:-/var/log/mail.log}
-DATE=$(date '+%b %e %H')
 RBLS=${rbls:-spamhaus.org spamcop.net manitu.net msrbl.net njabl.org}
 
 
@@ -14,7 +13,7 @@ get_blocked_by_domain_count() {
     local escaped_domain
     # escape dots - for a proper regular expression
     escaped_domain=$(echo "$1" | sed 's/\./\\./g')
-    grep -c "$DATE.*blocked using [^ ]*${escaped_domain}" "$LOGFILE"
+    grep -c " blocked using [^ ]*${escaped_domain}" "$LOGFILE"
 }
 
 
